@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mapViewModel"
+            type="com.shadowtech.covid_update.ui.map.map.MapViewModel" />
+    </data>
+
+    <FrameLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <fragment xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.map.map.MapsActivity" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_main"
+            android:layout_below="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            app:cardCornerRadius="5dp"
+            android:layout_marginTop="@dimen/dimen_50dp"
+            app:cardElevation="@dimen/dimen_10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_20dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_deaths_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/lato"
+                        android:text="--"
+                        app:data="@{mapViewModel.deathsCases.get()}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_16sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_deaths"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:drawableLeft="@drawable/ic_death"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:fontFamily="@font/lato"
+                        android:text="@string/deaths"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cases_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/lato"
+                        app:data="@{mapViewModel.confirmedCases.get()}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_20sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_cases"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:drawableLeft="@drawable/ic_confirmed"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:fontFamily="@font/lato"
+                        android:text="@string/total"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_recovered_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/lato"
+                        app:data="@{mapViewModel.recoveredCases.get()}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_16sp" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_recovered"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:drawableLeft="@drawable/ic_recovered"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:fontFamily="@font/lato"
+                        android:text="@string/recovered"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_below="@id/cv_main"
+                android:layout_alignParentRight="true"
+                app:fabSize="mini"
+                android:visibility="visible"
+                app:elevation="@dimen/dimen_10dp"
+                app:srcCompat="@drawable/ic_search" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabInstructions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_gravity="top|end"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_below="@id/fabSearch"
+                android:layout_alignParentRight="true"
+                app:fabSize="mini"
+                android:visibility="visible"
+                app:elevation="@dimen/dimen_10dp"
+                app:srcCompat="@drawable/ic_info" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_gravity="top|end"
+                android:layout_marginRight="@dimen/dimen_20dp"
+                android:layout_below="@id/fabInstructions"
+                android:layout_alignParentRight="true"
+                app:fabSize="mini"
+                android:visibility="visible"
+                app:elevation="@dimen/dimen_10dp"
+                app:srcCompat="@drawable/ic_refresh" />
+            <RelativeLayout
+                android:layout_below="@id/cv_main"
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:visibility="gone"
+                android:background="@drawable/rounded_corner_bg"
+                android:padding="@dimen/dimen_5dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:src="@drawable/ic_close"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/dimen_5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:focusable="true"
+                    android:clickable="true" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:clickable="true"
+                    android:focusedByDefault="true"
+                    android:id="@+id/search_input_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:textColor="@color/white"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/iv_close"
+                    android:fontFamily="@font/lato" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_Country"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+</layout>
