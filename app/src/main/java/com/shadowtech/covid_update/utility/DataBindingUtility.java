@@ -11,22 +11,26 @@ public class DataBindingUtility {
 
     @BindingAdapter({"data"})
     public static void setSummaryData(androidx.appcompat.widget.AppCompatTextView textView, int data) {
-        if (data == 0) {
-            textView.setText("--");
-        } else {
-            int initValue = 0;
-            String initialValue = textView.getText().toString();
-            if (!TextUtils.isEmpty(initialValue) &&  !initialValue.equalsIgnoreCase("--")) {
-                initValue = Integer.parseInt(initialValue);
-            }
-            ValueAnimator animator = ValueAnimator.ofInt(initValue, data);
-            animator.setDuration(2000);
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    textView.setText(animation.getAnimatedValue().toString());
+        try {
+            if (data == 0) {
+                textView.setText("--");
+            } else {
+                int initValue = 0;
+                String initialValue = textView.getText().toString();
+                if (!TextUtils.isEmpty(initialValue) && !initialValue.equalsIgnoreCase("--")) {
+                    initValue = Integer.parseInt(initialValue);
                 }
-            });
-            animator.start();
+                ValueAnimator animator = ValueAnimator.ofInt(initValue, data);
+                animator.setDuration(2000);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        textView.setText(animation.getAnimatedValue().toString());
+                    }
+                });
+                animator.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

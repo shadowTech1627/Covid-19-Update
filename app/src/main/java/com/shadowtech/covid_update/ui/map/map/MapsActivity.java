@@ -84,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         initView();
         observeData();
         loadAd();
-        
+
     }
 
 
@@ -280,10 +280,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (previousMarker != null) {
             previousMarker.remove();
         }
-        previousMarker = mMap.addMarker(new MarkerOptions().position(sydney).title(currentLocale.getDisplayCountry()));
-        previousMarker.setIcon(Utils.bitmapDescriptorFromVector(this, R.drawable.ic_marker));
+        if (sydney != null) {
+            previousMarker = mMap.addMarker(new MarkerOptions().position(sydney).title(currentLocale.getDisplayCountry()));
+            previousMarker.setIcon(Utils.bitmapDescriptorFromVector(this, R.drawable.ic_marker));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        }
         setUpMapStyle();
         setScrollListener();
     }

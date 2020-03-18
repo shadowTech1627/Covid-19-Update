@@ -1,5 +1,6 @@
 package com.shadowtech.covid_update.ui.map.countryList;
 
+import android.text.TextUtils;
 import android.widget.Filter;
 
 import com.shadowtech.covid_update.model.CountryDataModel;
@@ -25,10 +26,14 @@ public class CountryFilter extends Filter {
         if (constraint.length() == 0) {
             filteredList.addAll(origList);
         } else {
-            final String filterPattern = constraint.toString().toLowerCase().trim();
-            for (CountryDataModel item : origList) {
-                if (item.getCountry().toLowerCase().contains(filterPattern)) {
-                    filteredList.add(item);
+            if (TextUtils.isEmpty(constraint)) {
+                filteredList.addAll(origList);
+            } else {
+                final String filterPattern = constraint.toString().toLowerCase().trim();
+                for (CountryDataModel item : origList) {
+                    if (item.getCountry().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
                 }
             }
         }

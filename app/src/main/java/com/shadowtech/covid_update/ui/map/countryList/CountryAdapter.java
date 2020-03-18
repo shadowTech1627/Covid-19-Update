@@ -43,11 +43,14 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
     @Override
     public void onBindViewHolder(@NonNull CountryViewHolder holder, int position) {
         CountryDataModel countryDataModel = filteredList.get(position);
-        String countryISO = countryMap.get(countryDataModel.getCountry());
-        if (!TextUtils.isEmpty(countryISO)) {
-            holder.itemCountryBinding.ivFlag.setImageResource(World.getFlagOf(countryISO));
-        }
+        try {
+            String countryISO = countryMap.get(countryDataModel.getCountry());
+            if (!TextUtils.isEmpty(countryISO)) {
+                holder.itemCountryBinding.ivFlag.setImageResource(World.getFlagOf(countryISO));
+            }
+        } catch (Exception e) {
 
+        }
         holder.countryItemViewModel.cases.set(countryDataModel.getCases());
         holder.countryItemViewModel.country.set(countryDataModel.getCountry());
         holder.countryItemViewModel.critical.set(countryDataModel.getCritical());
